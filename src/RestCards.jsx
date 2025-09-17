@@ -1,9 +1,9 @@
 import React from 'react'
-import './RestCards.css'
+import './css/RestCards.css'
 
 const RestCards = ({restData}) => {
 
-    console.log(restData);
+    // console.log(restData);
 
     const {
         name,

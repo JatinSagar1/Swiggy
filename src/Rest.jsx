@@ -5,11 +5,15 @@ import RestCards from './RestCards';
 const Rest = () => {
 
     const [restData, setRestData] = useState([]);
+    const [filtered, setFiltered] = useState([]);
+    const [searchText, setSearchText] = useState("");
+
     const [error, setError] = useState(null);
 
     async function getData() {
         try {
             const data = await fetch("https://www.swiggy.com/mapi/restaurants/list/v5?offset=0&is-seo-homepage-enabled=true&lat=28.63270&lng=77.21980&carousel=true&third_party_vendor=1");
+            // const data = await fetch("https://www.swiggy.com/mapi/restaurants/list/v5?lat=28.63270&lng=77.21980&collection=83633&tags=layout_CCS_NorthIndian&sortBy=&filters=&type=rcv2&offset=0&carousel=true&third_party_vendor=1");
             if (!data.ok) {
                 throw new Error(`HTTP error! status: ${data.status}`);
             }
@@ -22,6 +26,7 @@ const Rest = () => {
             }
             const restcard = cards.find((e) => e?.card?.card?.gridElements?.infoWithStyle?.restaurants);
             const rest = restcard?.card?.card?.gridElements?.infoWithStyle?.restaurants;
+
             if (!Array.isArray(rest)) {
                 setRestData([]);
                 setError('No restaurants found in response.');
@@ -29,6 +34,7 @@ const Rest = () => {
             }
             setRestData(rest);
             setError(null);
+            setFiltered(rest);
         } catch (error) {
             setError(error.message);
             setRestData([]);
@@ -41,13 +47,20 @@ const Rest = () => {
 
     return (
         <>
+        <div >
+            <input type="text"  placeholder='Search Restaurants' onChange={(e)=>{setSearchText(e.target.value)}}/>
+            <button onClick={()=>{
+                const data = restData.filter((e)=>e?.info?.name?.toLowerCase()?.includes(searchText.toLowerCase()));
+                setFiltered(data);
+            }}>Search</button>
+        </div>
             <div className='container'>
                 {error && (
                     <div style={{ color: 'red', margin: '1rem' }}>Error: {error}</div>
                 )}
                 <div className='cards-container'>
                     {Array.isArray(restData) && restData.length > 0 ? (
-                        restData.map((restData) => (
+                        filtered.map((restData) => (
                             <RestCards restData={restData} key={restData?.info?.id} />
                         ))
                     ) : !error ? (

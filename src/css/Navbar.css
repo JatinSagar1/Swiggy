@@ -43,6 +43,7 @@
     justify-content: space-between;
 }
 
+
 .hmm {
     display: inline-flex;
     align-items: center;
@@ -57,6 +58,26 @@
 .hmm:hover, .hmm:hover * {
     color: orange !important;
     fill: orange !important;
+}
+
+.search-hmm {
+    position: relative;
+}
+.search-input {
+    margin-left: 8px;
+    padding: 6px 12px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    outline: none;
+    transition: width 0.3s;
+    width: 140px;
+}
+@media (max-width: 600px) {
+    .search-input {
+        width: 90px;
+        font-size: 14px;
+    }
 }
 
 .menu a{

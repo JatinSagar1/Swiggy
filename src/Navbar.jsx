@@ -7,8 +7,12 @@ import offers from "./assets/discount.png";
 import help from "./assets/info-circle.png";
 import signin from "./assets/user-square.png";
 import cart from "./assets/cart.png";
+import { Context } from './Context';
+import { useContext } from 'react';
 
 const Navbar = () => {
+  const { restData, setFiltered } = useContext(Context);
+
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
 
@@ -33,7 +37,14 @@ const Navbar = () => {
                 className="search-input"
                 placeholder="Search..."
                 value={searchValue}
-                onChange={e => setSearchValue(e.target.value)}
+                onChange={(e) => {setSearchValue(e.target.value)}}
+                onKeyDown={(k)=>{
+                  if(k.key == "Enter"){
+                    const data = restData.filter((e)=>e?.info?.name?.toLowerCase()?.includes(searchValue.toLowerCase()));
+                    setFiltered(data);
+                    setSearchOpen(false);
+                  }
+                }}
                 autoFocus
                 onBlur={() => setSearchOpen(false)}
               />

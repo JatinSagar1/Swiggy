@@ -11,7 +11,7 @@ const Rest = () => {
         <>
             <div className='container'>
                 {error && (
-                    <div style={{ color: 'red', margin: '1rem' }}>Error: {error}</div>
+                    <div style={{ color: 'red', margin: '1rem' }}>Error: {error} <br /> Please Download CORS Extension and start to Use</div>
                 )}
                 <div className='cards-container'>
                     {Array.isArray(restData) && restData.length > 0 ? (

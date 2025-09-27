@@ -1,0 +1,61 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.menu-card {
+  display: flex;
+  flex-direction: row;       /* info left, image right */
+  align-items: flex-start;
+  gap: 20px;
+  padding: 15px;
+  margin: 15px auto;         /* centers the card horizontally */
+  width: 70%;                /* 70% width of container */
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+  cursor: pointer;
+}
+
+.menu-card:hover {
+  transform: translateY(-3px);  
+}
+
+.menu-card-info {
+  flex: 1;                   
+}
+
+.menu-card-name {
+  font-weight: 600;
+  font-size: 18px;
+  margin-bottom: 5px;
+}
+
+.menu-card-price {
+  font-weight: 500;
+  color: #555;
+  margin-bottom: 5px;
+}
+
+.menu-card-rating {
+  display: inline-block;      
+  color: green;
+  border-radius: 5px;
+  font-size: 14px;
+  margin-bottom: 5px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.menu-card-description {
+  font-size: 14px;
+  color: #777;
+}
+
+.menu-card-img {
+  width: 180px;
+  height: 140px;
+  object-fit: cover;          
+  border-radius: 10px;
+}

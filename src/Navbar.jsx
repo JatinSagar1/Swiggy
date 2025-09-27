@@ -8,6 +8,7 @@ import help from "./assets/info-circle.png";
 import signin from "./assets/user-square.png";
 import cart from "./assets/cart.png";
 import { Context } from './Context';
+import { Link } from 'react-router-dom';
 
 const Navbar = () => {
   const { restData, setFiltered } = useContext(Context);
@@ -17,9 +18,12 @@ const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   return (
+    <>
     <div className="navbar">
       {/* Logo */}
+      <Link to={"/Swiggy/"}>
       <img src={img} alt="logo" className="logo" />
+      </Link>
 
       {/* Hamburger (only visible on mobile) */}
       <div className="hamburger" onClick={() => setMenuOpen(!menuOpen)}>
@@ -49,31 +53,31 @@ const Navbar = () => {
           />
           {searchOpen ? (
             <input
-              type="text"
-              className="search-input"
-              placeholder="Search..."
-              value={searchValue}
-              onChange={(e) => setSearchValue(e.target.value)}
-              onKeyDown={(k) => {
-                if (k.key === "Enter") {
-                  const data = restData.filter((e) =>
-                    e?.info?.name?.toLowerCase()?.includes(searchValue.toLowerCase())
-                  );
-                  setFiltered(data);
-                  setSearchOpen(false);
-                }
-              }}
-              autoFocus
-              onBlur={() => setSearchOpen(false)}
-            />
-          ) : (
-            <a
-              href="#"
-              onClick={(e) => {
-                e.preventDefault();
+            type="text"
+            className="search-input"
+            placeholder="Search..."
+            value={searchValue}
+            onChange={(e) => setSearchValue(e.target.value)}
+            onKeyDown={(k) => {
+              if (k.key === "Enter") {
+                const data = restData.filter((e) =>
+                  e?.info?.name?.toLowerCase()?.includes(searchValue.toLowerCase())
+              );
+              setFiltered(data);
+              setSearchOpen(false);
+            }
+          }}
+          autoFocus
+          onBlur={() => setSearchOpen(false)}
+          />
+        ) : (
+          <a
+          href="#"
+          onClick={(e) => {
+            e.preventDefault();
                 setSearchOpen(true);
               }}
-            >
+              >
               Search
             </a>
           )}
@@ -95,6 +99,9 @@ const Navbar = () => {
         </div>
       </div>
     </div>
+    
+    <div className='gap' style={{height: "70px"}}></div>
+          </>
   );
 };
 

@@ -12,7 +12,6 @@ const Parent = ({children}) => {
     async function getData() {
         try {
             const data = await fetch("https://www.swiggy.com/mapi/restaurants/list/v5?offset=0&is-seo-homepage-enabled=true&lat=28.63270&lng=77.21980&carousel=true&third_party_vendor=1");
-            // const data = await fetch("https://www.swiggy.com/mapi/restaurants/list/v5?lat=28.63270&lng=77.21980&collection=83633&tags=layout_CCS_NorthIndian&sortBy=&filters=&type=rcv2&offset=0&carousel=true&third_party_vendor=1");
             if (!data.ok) {
                 throw new Error(`HTTP error! status: ${data.status}`);
             }
@@ -25,7 +24,7 @@ const Parent = ({children}) => {
             }
             const restcard = cards.find((e) => e?.card?.card?.gridElements?.infoWithStyle?.restaurants);
             const rest = restcard?.card?.card?.gridElements?.infoWithStyle?.restaurants;
-            console.log(rest);
+            // console.log(rest);
 
             if (!Array.isArray(rest)) {
                 setRestData([]);

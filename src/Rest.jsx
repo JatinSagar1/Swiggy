@@ -1,6 +1,7 @@
 import React from 'react';
 import RestCards from './RestCards';
 import { Context } from './Context';
+import { Link } from 'react-router-dom';
 
 
 
@@ -15,9 +16,14 @@ const Rest = () => {
                 )}
                 <div className='cards-container'>
                     {Array.isArray(restData) && restData.length > 0 ? (
-                        filtered.map((restData) => (
-                            <RestCards restData={restData} key={restData?.info?.id} />
-                        ))
+                        filtered.map((e) => {
+                            return(
+                                <Link key={e?.info?.id} to={`rest/${e?.info?.id}`} >
+                                <RestCards restData={e} key={e?.info?.id} />
+                                </Link>
+                            )
+                            
+})
                     ) : !error ? (
                         <div>No restaurants found.</div>
                     ) : null}

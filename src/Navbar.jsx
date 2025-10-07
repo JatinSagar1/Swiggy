@@ -9,6 +9,7 @@ import signin from "./assets/user-square.png";
 import cart from "./assets/cart.png";
 import { Context } from './Context';
 import { Link } from 'react-router-dom';
+import OnlineStatus from './OnlineStatus';
 
 const Navbar = () => {
   const { restData, setFiltered } = useContext(Context);
@@ -16,6 +17,8 @@ const Navbar = () => {
   const [searchOpen, setSearchOpen] = useState(false);
   const [searchValue, setSearchValue] = useState("");
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const isOnline = OnlineStatus();
 
   return (
     <>
@@ -97,6 +100,20 @@ const Navbar = () => {
           <img src={cart} alt="cart" />
           <a href="#">Cart</a>
         </div>
+
+    <span style={{marginTop: "5px"}}>
+      {isOnline ? "Online" : "Offline"}{" "}
+      <span
+        style={{
+          color: isOnline ? "green" : "red",
+          fontSize: "18px",
+          verticalAlign: "middle",
+        }}
+      >
+        ●
+      </span>
+    </span>
+
       </div>
     </div>
     

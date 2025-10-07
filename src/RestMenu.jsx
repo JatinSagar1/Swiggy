@@ -4,13 +4,15 @@ import { useEffect } from 'react'
 import { useState } from 'react'
 import RestMenuCard from './RestMenuCard'
 import { foodImgs } from './urls'
+import Typesinmenu from './Typesinmenu'
 
 import "./css/RestMenu.css"
 
 const RestMenu = () => {
   const {id} = useParams();
-  const [menu, setMenu] = useState([null]);
-  const [infoCard, setInfoCard] = useState(null);
+  const [menu, setMenu] = useState([]);
+  const [infoCard, setInfoCard] = useState({});
+  const [types, setTypes] = useState([]);
   // console.log(id)
 
   async function getData() {
@@ -25,7 +27,7 @@ const RestMenu = () => {
         return e?.card?.card?.info;
       })
       const maininfo = infocard?.card?.card?.info;
-      console.log("maininfo", maininfo);
+      // console.log("maininfo", maininfo);
       setInfoCard(maininfo);
       
       const groupcard = cards.find((e)=>{
@@ -36,9 +38,16 @@ const RestMenu = () => {
       const restmenu = groupcard?.groupedCard?.cardGroupMap?.REGULAR?.cards;
       // console.log("restmenu", restmenu);
 
+      const types = restmenu.filter((e)=>{
+        return e?.card?.card?.title;
+      })
+      // console.log("types", types);
+      setTypes(types);
+
       const items = restmenu.filter((e)=>{
         return e?.card?.card?.itemCards;
       })
+      // console.log("items", items);
 
       setMenu(items);
       // console.log("items", items);
@@ -72,6 +81,11 @@ const RestMenu = () => {
     </div>
 
     <div className='menu-grid'>
+
+      {types.map((e)=>
+      <Typesinmenu key={e?.card?.card?.title} types={e?.card?.card}/>
+    )}
+
     {menu.map((e)=>
       e?.card?.card?.itemCards.map((i)=>(
         <RestMenuCard key={i?.card?.info?.id} i={i}/>
